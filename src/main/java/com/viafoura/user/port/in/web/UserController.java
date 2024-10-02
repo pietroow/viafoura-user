@@ -38,6 +38,8 @@ public class UserController {
                 .build();
     }
 
+    @Operation(summary = "Update user")
+    @ApiResponse(responseCode = "204", description = "User updated successfully")
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateUser(@PathVariable Long id,
@@ -45,16 +47,22 @@ public class UserController {
         manageUserUseCase.updateUser(id, userUpdateRequestDTO);
     }
 
+    @Operation(summary = "List all users")
+    @ApiResponse(responseCode = "200", description = "List all users in the application")
     @GetMapping
     public List<UserData> listUsers() {
         return manageUserUseCase.listUsers();
     }
 
+    @Operation(summary = "Find user by id")
+    @ApiResponse(responseCode = "200", description = "Find user by its id")
     @GetMapping("/{id}")
     public UserData getUser(@PathVariable Long id) {
         return manageUserUseCase.findById(id);
     }
 
+    @Operation(summary = "Delete user from the application")
+    @ApiResponse(responseCode = "201", description = "User deleted successfully")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
